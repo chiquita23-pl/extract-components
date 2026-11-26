@@ -282,18 +282,14 @@ function removeRatings() {
       </div>
     </div>
     <div class="movie-list">
-      <div
-        class="movie-item group"
-        v-for="(movie, movieIndex) in movies"
-        :key="movie.id"
-      >
       <MovieItem
-          :movie="movie"
-          @updateRating="updateRating"
-          @removeMovie="removeMovie"
-          @editMovie="editMovie"
-        />
-      </div>
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+        @updateRating="updateRating"
+        @removeMovie="removeMovie"
+        @editMovie="editMovie"
+      />
     </div>
   </div>
 </template>

@@ -19,6 +19,7 @@ const emit = defineEmits(["updateRating", "editMovie", "removeMovie"]);
 </script>
 
 <template>
+  <div class="movie-item group">
         <div class="movie-item-image-wrapper">
           <div class="movie-item-star-wrapper">
             <StarIcon
@@ -92,4 +93,5 @@ const emit = defineEmits(["updateRating", "editMovie", "removeMovie"]);
             </div>
           </div>
         </div>
+  </div>
 </template>
