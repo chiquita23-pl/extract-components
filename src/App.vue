@@ -3,7 +3,6 @@ import { computed, reactive, ref } from "vue";
 /*
 These are Icons that you can use, of course you can use other ones if you prefer.
 */
-import { StarIcon, TrashIcon, PencilIcon } from "@heroicons/vue/24/solid";
 import { items } from "./movies.json";
 import MovieItem from "./MovieItem.vue";
 
@@ -16,6 +15,8 @@ function removeMovie(movieIndex) {
   movies.value = movies.value.filter((movie, index) => index !== movieIndex);
 }
 function editMovie(movieIndex) {
+  console.log('Hello from editMovie', movieIndex);
+
   const movie = movies.value[movieIndex];
 
   form.id = movie.id;

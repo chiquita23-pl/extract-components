@@ -1,19 +1,20 @@
-<script setup lang="ts">
-import type { Movie } from "./types";
+<script setup>
 
-const props = defineProps<{
-  movie: Movie;
-  movieIndex: number;
-  updateRating: (movieIndex: number, rating: number) => void;
-  removeMovie: (movieIndex: number) => void;
-  editMovie: (movieIndex: number) => void;
-}>();
+import { StarIcon, TrashIcon, PencilIcon } from "@heroicons/vue/24/solid";
 
-const emit = defineEmits<{
-  updateRating: [movieIndex: number, rating: number];
-  removeMovie: [movieIndex: number];
-  editMovie: [movieIndex: number];
-}>();
+const props = defineProps({
+  movie: {
+    id: Number,
+    name: String,
+    genres: Array,
+    description: String,
+    image: String,
+    rating: Number,
+  },
+  movieIndex: Number  
+});
+
+const emit = defineEmits(["updateRating", "editMovie", "removeMovie"]);
 </script>
 
 <template>
@@ -68,7 +69,7 @@ const emit = defineEmits<{
                   star <= props.movie.rating ? 'text-yellow-500' : 'text-gray-500',
                 ]"
                 :disabled="star === props.movie.rating"
-                @click="updateRating(movieIndex, star)"
+                @click="emit('updateRating', props.movieIndex, star)"
               >
                 <StarIcon class="movie-item-star-icon" />
               </button>
@@ -77,13 +78,13 @@ const emit = defineEmits<{
             <div class="movie-item-actions-list-wrapper">
               <button
                 class="movie-item-action-edit-button"
-                @click="editMovie(movieIndex)"
+                @click="emit('editMovie', props.movieIndex)"
               >
                 <PencilIcon class="w-4 h-4" />
               </button>
               <button
                 class="movie-item-action-remove-button"
-                @click="removeMovie(movieIndex)"
+                @click="emit('removeMovie', props.movieIndex)"
               >
                 <TrashIcon class="w-4 h-4" />
               </button>
