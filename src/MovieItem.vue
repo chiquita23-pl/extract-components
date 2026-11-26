@@ -1,6 +1,7 @@
 <script setup>
 
 import { StarIcon, TrashIcon, PencilIcon } from "@heroicons/vue/24/solid";
+import { computed } from "vue";
 
 const props = defineProps({
   movie: {
@@ -69,7 +70,7 @@ const emit = defineEmits(["updateRating", "editMovie", "removeMovie"]);
                   star <= props.movie.rating ? 'text-yellow-500' : 'text-gray-500',
                 ]"
                 :disabled="star === props.movie.rating"
-                @click="emit('updateRating', props.movieIndex, star)"
+                @click="emit('updateRating', props.movie.id, star)"
               >
                 <StarIcon class="movie-item-star-icon" />
               </button>
@@ -78,13 +79,13 @@ const emit = defineEmits(["updateRating", "editMovie", "removeMovie"]);
             <div class="movie-item-actions-list-wrapper">
               <button
                 class="movie-item-action-edit-button"
-                @click="emit('editMovie', props.movieIndex)"
+                @click="emit('editMovie', props.movie.id)"
               >
                 <PencilIcon class="w-4 h-4" />
               </button>
               <button
                 class="movie-item-action-remove-button"
-                @click="emit('removeMovie', props.movieIndex)"
+                @click="emit('removeMovie', props.movie.id)"
               >
                 <TrashIcon class="w-4 h-4" />
               </button>

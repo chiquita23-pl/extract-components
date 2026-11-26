@@ -8,16 +8,14 @@ import MovieItem from "./MovieItem.vue";
 
 const movies = ref(items);
 
-function updateRating(movieIndex, rating) {
-  movies.value[movieIndex].rating = rating;
+function updateRating(movieId, rating) {
+  movies.value[movieId].rating = rating;
 }
-function removeMovie(movieIndex) {
-  movies.value = movies.value.filter((movie, index) => index !== movieIndex);
+function removeMovie(movieId) {
+  movies.value = movies.value.filter((movie) => movie.id !== movieId);
 }
-function editMovie(movieIndex) {
-  console.log('Hello from editMovie', movieIndex);
-
-  const movie = movies.value[movieIndex];
+function editMovie(movieId) {
+  const movie = movies.value.find((m) => m.id === movieId);
 
   form.id = movie.id;
   form.name = movie.name;
@@ -291,7 +289,6 @@ function removeRatings() {
       >
       <MovieItem
           :movie="movie"
-          :movieIndex="movieIndex"
           @updateRating="updateRating"
           @removeMovie="removeMovie"
           @editMovie="editMovie"
